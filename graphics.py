@@ -45,13 +45,46 @@ class Line:
         y2 = self.point2.y
         canvas.create_line(x1, y1, x2, y2, fill=fill_color, width=2)
 
+class Cell:
+    def __init__(self, has_left_wall, has_right_wall
+, has_top_wall, has_bottom_wall, _x1, _x2, _y1, _y2, _win):
+        
+        self.has_left_wall = has_left_wall
+        self.has_right_wall = has_right_wall
+        self.has_top_wall = has_top_wall
+        self.has_bottom_wall = has_bottom_wall
+        self._x1 = _x1
+        self._x2 = _x2
+        self._y1 = _y1
+        self._y2 = _y2
+        self._win = _win
 
+    def draw(self):
+        if self.has_left_wall:
+            start_point = Point(self._x1, self._y1)
+            end_point = Point(self._x1, self._y2)
+            lines = Line(start_point, end_point)
+            self._win.draw_line(lines, fill_colour="black")
+        if self.has_right_wall:
+            start_point = Point(self._x2, self._y1)
+            end_point = Point(self._x2, self._y2)
+            lines = Line(start_point, end_point)
+            self._win.draw_line(lines, fill_colour="black")
+        if self.has_top_wall:
+            start_point = Point(self._x1, self._y1)
+            end_point = Point(self._x2, self._y1)
+            lines = Line(start_point, end_point)
+            self._win.draw_line(lines, fill_colour="black")
+        if self.has_bottom_wall:
+            start_point = Point(self._x1, self._y2)
+            end_point = Point(self._x2, self._y2)
+            lines = Line(start_point, end_point)
+            self._win.draw_line(lines, fill_colour="black")
+            
 
+        
         
 
 
 
-    
-
         
-

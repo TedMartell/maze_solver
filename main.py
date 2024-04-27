@@ -1,12 +1,17 @@
-from graphics import Window, Line, Point 
+from graphics import Window, Line, Point, Cell
 
 
 def main():
     win = Window(800, 600)  # Adjust the size as needed
-    start_point = Point(100,100)
-    end_point = Point(200,200)
-    lines = Line(start_point, end_point)
-    win.draw_line(lines, fill_colour="red")
+    x1 = 100
+    x2 = 200
+    y1 = 100
+    y2 = 200
+    cell1 = Cell(True, True, True, True, x1, x2, y1, y2, win)
+    cell2 = Cell(True, True, True, True, 200, 300, 200, 300, win)
+
+    cell1.draw()
+    cell2.draw()
     win.wait_for_close()
 
 if __name__ == "__main__":
