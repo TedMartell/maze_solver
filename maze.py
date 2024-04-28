@@ -12,9 +12,8 @@ class Maze:
         num_cols,
         cell_size_x,
         cell_size_y,
-        win = None,
+        win=None,
     ):
-        
         self._cells = []
         self._x1 = x1
         self._y1 = y1
@@ -25,8 +24,7 @@ class Maze:
         self._win = win
 
         self._create_cells()
-
-        self._create_cells()
+        self._break_entrance_and_exit()
 
     def _create_cells(self):
         for i in range(self._num_cols):
@@ -55,14 +53,15 @@ class Maze:
         time.sleep(0.05)
 
     def _break_entrance_and_exit(self):
-        pass
+        self._cells[0][0].has_top_wall = False
+        self._draw_cell(0, 0)
+        self._cells[self._num_cols - 1][self._num_rows - 1].has_bottom_wall = False
+        self._draw_cell(self._num_cols - 1, self._num_rows - 1)
 
-    def draw_maze(self):
-        for i, column in enumerate(self._cells):
-            for j, cell in enumerate(column):
-            # Calculate cell corners
-                x1 = self._x1 + j * self._cell_size_x
-                y1 = self._y1 + i
+        
+
+
+
 
 
 
