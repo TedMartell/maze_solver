@@ -1,6 +1,6 @@
 from graphics import Window, Line, Point
 from cell import Cell
-from time import sleep
+import time
 
 
 class Maze:
@@ -21,7 +21,7 @@ class Maze:
         self.num_cols = num_cols
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
-        self.win = win
+        self._win = win
 
         self._create_cells()
 
@@ -37,14 +37,18 @@ class Maze:
             
       
     def _draw_cell(self, i, j):
+        if self._win is None:
+            return
         cell_x = self.x1 + i * self.cell_size_x
         cell_y = self.y1 + j * self.cell_size_y
         self._cells[i][j].draw(cell_x, cell_y + self.cell_size_y, cell_x + self.cell_size_x, cell_y)
         self._animate()
 
     def _animate(self):
-        self.win.redraw()
-        sleep(0.05)
+        if self._win is None:
+            return
+        self._win.redraw()
+        time.sleep(0.05)
 
 
 
