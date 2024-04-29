@@ -1,6 +1,7 @@
 from graphics import Window, Line, Point
 from cell import Cell
 import time
+import random
 
 
 class Maze:
@@ -12,7 +13,8 @@ class Maze:
         num_cols,
         cell_size_x,
         cell_size_y,
-        win=None,
+        win = None,
+        seed = None,
     ):
         self._cells = []
         self._x1 = x1
@@ -22,6 +24,10 @@ class Maze:
         self._cell_size_x = cell_size_x
         self._cell_size_y = cell_size_y
         self._win = win
+        self._seed = seed
+
+        if self._seed is not None:
+            random.seed(seed)
 
         self._create_cells()
         self._break_entrance_and_exit()
@@ -57,6 +63,54 @@ class Maze:
         self._draw_cell(0, 0)
         self._cells[self._num_cols - 1][self._num_rows - 1].has_bottom_wall = False
         self._draw_cell(self._num_cols - 1, self._num_rows - 1)
+
+    def _break_walls_r(self, i, j):
+        current_cell = self._cells[i][j]
+        current_cell._visited = True
+        while True:
+            to_visit = []
+            if i > 0 and not self._cells[i-1][j]._visited:
+                to_visit.append((i-1, j))
+            if i+1 < self._num_cols and not self._cells[i+1][j]._visited:
+                to_visit.append((i+1, j))
+            if j > 0 and not self._cells[i][j-1]._visited:
+                to_visit.append((i, j-1))
+            if j+1 < self._num_rows and not self._cells[i][j+1]._visited:
+                to_visit.append((i, j+1))
+            if to_visit == []:
+                self._draw_cell(i, j)
+                return
+            else:
+                next_cord = random.randint(0, len(to_visit)-1)
+                print(next_cord)
+                print(to_visit[next_cord])
+                next_cell = self._cells[to_visit[next_cord][0]][to_visit[next_cord][1]]
+                if  i+1 == to_visit[next_cord][0]:
+                    current_cell.has_right_wall = False
+                    next_cell.has_left_wall = False
+                if i-1 == to_visit[next_cord][0]:
+                    current_cell.has_left_wall = False
+                    next_cell.has_right_wall = False
+                if j+1 == to_visit[next_cord][1]:
+                    current_cell.has_bottom_wall = False
+                    next_cell.has_top_wall = False
+                if j-1 == to_visit[next_cord][1]:
+                    current_cell.has_top_wall = False
+                    next_cell.has_bottom_wall = False
+                self._break_walls_r(to_visit[next_cord][0], to_visit[next_cord][1])
+
+    def _reset_cells_visited(self):
+
+
+
+            
+            
+
+            
+
+
+
+
 
         
 

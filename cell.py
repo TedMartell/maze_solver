@@ -13,6 +13,7 @@ class Cell:
         self._y1 = None
         self._y2 = None
         self._win = win
+        self._visited = False
 
     def draw(self,x1, y1, x2, y2):
         self._x1 = x1
@@ -23,45 +24,45 @@ class Cell:
             start_point = Point(self._x1, self._y1)
             end_point = Point(self._x1, self._y2)
             lines = Line(start_point, end_point)
-            self._win.draw_line(lines, fill_colour="black")
+            self._win.draw_line(lines, fill_color="black")
         else:
             start_point = Point(self._x1, self._y1)
             end_point = Point(self._x1, self._y2)
             lines = Line(start_point, end_point)
-            self._win.draw_line(lines, fill_colour="white")
+            self._win.draw_line(lines, fill_color="white")
 
         if self.has_right_wall:
             start_point = Point(self._x2, self._y1)
             end_point = Point(self._x2, self._y2)
             lines = Line(start_point, end_point)
-            self._win.draw_line(lines, fill_colour="black")
+            self._win.draw_line(lines, fill_color="black")
         else:
             start_point = Point(self._x2, self._y1)
             end_point = Point(self._x2, self._y2)
             lines = Line(start_point, end_point)
-            self._win.draw_line(lines, fill_colour="white")
+            self._win.draw_line(lines, fill_color="white")
 
         if self.has_top_wall:
             start_point = Point(self._x1, self._y1)
             end_point = Point(self._x2, self._y1)
             lines = Line(start_point, end_point)
-            self._win.draw_line(lines, fill_colour="black")
+            self._win.draw_line(lines, fill_color="black")
         else:
             start_point = Point(self._x1, self._y1)
             end_point = Point(self._x2, self._y1)
             lines = Line(start_point, end_point)
-            self._win.draw_line(lines, fill_colour="white")
+            self._win.draw_line(lines, fill_color="white")
 
         if self.has_bottom_wall:
             start_point = Point(self._x1, self._y2)
             end_point = Point(self._x2, self._y2)
             lines = Line(start_point, end_point)
-            self._win.draw_line(lines, fill_colour="black")
+            self._win.draw_line(lines, fill_color="black")
         else:
             start_point = Point(self._x1, self._y2)
             end_point = Point(self._x2, self._y2)
             lines = Line(start_point, end_point)
-            self._win.draw_line(lines, fill_colour="white")
+            self._win.draw_line(lines, fill_color="white")
 
     def draw_move(self, to_cell, undo=False):
         half_length = abs(self._x2 - self._x1) // 2
