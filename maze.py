@@ -82,8 +82,6 @@ class Maze:
                 return
             else:
                 next_cord = random.randint(0, len(to_visit)-1)
-                print(next_cord)
-                print(to_visit[next_cord])
                 next_cell = self._cells[to_visit[next_cord][0]][to_visit[next_cord][1]]
                 if  i+1 == to_visit[next_cord][0]:
                     current_cell.has_right_wall = False
@@ -100,6 +98,9 @@ class Maze:
                 self._break_walls_r(to_visit[next_cord][0], to_visit[next_cord][1])
 
     def _reset_cells_visited(self):
+        for i in range(len(self._cells)):
+            for j in range(len(self._cells[i])):
+                self._cells[i][j]._visited = False
 
 
 
